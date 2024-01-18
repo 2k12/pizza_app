@@ -1,1 +1,51 @@
-<p>home works!</p>
+<!-- home.component.html -->
+<div class="container mt-3">
+    <h2>Listado de Pizzas</h2>
+    <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Pizza</button>
+
+    <div *ngIf="mostrarForm"  class="form-container">
+        <h3>Agregar Nueva Pizza</h3>
+        <form (ngSubmit)="agregarPizza()">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaPizza.piz_name" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="origen">Origen:</label>
+                <input type="text" class="form-control" id="origen" [(ngModel)]="nuevaPizza.piz_origin" name="origen">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select class="form-control" id="estado" [(ngModel)]="nuevaPizza.piz_state" name="estado">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Origen</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pizza of data">
+                <td>{{ pizza.piz_id }}</td>
+                <td>{{ pizza.piz_name }}</td>
+                <td>{{ pizza.piz_origin }}</td>
+                <td>{{ pizza.piz_state ? 'Activo' : 'Inactivo' }}</td>
+                <td>
+                    <!-- Aquí puedes añadir botones o enlaces para editar o eliminar -->
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

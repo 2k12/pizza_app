@@ -1,0 +1,122 @@
+/* home.component.css */
+/* Estilos para el formulario */
+/* Estilos para el contenedor del formulario */
+.form-container {
+    background-color: #71a2d3; /* Fondo gris claro */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px 0; /* Margen superior e inferior */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+
+/* Estilos para la tabla */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+/* Estilos para los encabezados de la tabla */
+.table thead th {
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Estilos para las celdas de la tabla */
+.table td,
+.table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Estilos para las filas de la tabla al pasar el ratón por encima */
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+/* Estilos para los botones dentro de la tabla */
+.table .btn {
+    margin-right: 5px;
+}
+
+
+.btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.mb-3 {
+    margin-bottom: 16px;
+}
