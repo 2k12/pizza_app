@@ -19,6 +19,23 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  public crearPizza(pizza: any): Observable<any> {
+    return this.http.post(`${this.urlApi}/pizzas`, pizza).pipe(
+      catchError(this.handleError)
+    );
+  } 
+  
+  public editarPizza(pizza: any): Observable<any> {
+    return this.http.post(`${this.urlApi}/update/${pizza.piz_id}`, pizza).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public eliminarPizza(piz_id: number): Observable<any> {
+    return this.http.delete(`${this.urlApi}/borrar/${piz_id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 
   private handleError(error: HttpErrorResponse) {

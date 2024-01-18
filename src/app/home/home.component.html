@@ -3,7 +3,7 @@
     <h2>Listado de Pizzas</h2>
     <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Pizza</button>
 
-    <div *ngIf="mostrarForm"  class="form-container">
+    <div *ngIf="mostrarForm" class="form-container">
         <h3>Agregar Nueva Pizza</h3>
         <form (ngSubmit)="agregarPizza()">
             <div class="form-group">
@@ -43,7 +43,8 @@
                 <td>
                     <!-- Aquí puedes añadir botones o enlaces para editar o eliminar -->
                     <button class="btn btn-primary btn-sm">Editar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                    <button class="btn btn-danger btn-sm" (click)="eliminarPizza(pizza.piz_id)">Eliminar</button>
+
                 </td>
             </tr>
         </tbody>
