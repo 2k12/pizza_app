@@ -4,24 +4,27 @@
     <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Pizza</button>
 
     <div *ngIf="mostrarForm" class="form-container">
-        <h3>Agregar Nueva Pizza</h3>
-        <form (ngSubmit)="agregarPizza()">
+        <h3>{{ isEditing ? 'Editar Pizza' : 'Agregar Nueva Pizza' }}</h3>
+        <form (ngSubmit)="isEditing ? editarPizza() : agregarPizza()">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaPizza.piz_name" name="nombre">
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaPizza.piz_name" name="nombre" required>
             </div>
             <div class="form-group">
                 <label for="origen">Origen:</label>
-                <input type="text" class="form-control" id="origen" [(ngModel)]="nuevaPizza.piz_origin" name="origen">
+                <input type="text" class="form-control" id="origen" [(ngModel)]="nuevaPizza.piz_origin" name="origen" required>
             </div>
-            <div class="form-group">
+            <!-- El menú desplegable del estado solo aparecerá en modo de edición -->
+            <div class="form-group" *ngIf="isEditing">
                 <label for="estado">Estado:</label>
-                <select class="form-control" id="estado" [(ngModel)]="nuevaPizza.piz_state" name="estado">
-                    <option value="true">Activo</option>
-                    <option value="false">Inactivo</option>
+                <select class="form-control" id="estado" [(ngModel)]="nuevaPizza.piz_state" name="estado" required>
+                    <option [value]="true">Activo</option>
+                    <option [value]="false">Inactivo</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Agregar</button>
+            <button type="submit" class="btn btn-primary">{{ isEditing ? 'Guardar Cambios' : 'Agregar' }}</button>
+            <!-- Botón para cancelar la edición -->
+            <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="cancelarEdicion()">Cancelar</button>
         </form>
     </div>
     <table class="table">
@@ -41,10 +44,8 @@
                 <td>{{ pizza.piz_origin }}</td>
                 <td>{{ pizza.piz_state ? 'Activo' : 'Inactivo' }}</td>
                 <td>
-                    <!-- Aquí puedes añadir botones o enlaces para editar o eliminar -->
-                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-primary btn-sm" (click)="startEdit(pizza)">Editar</button>
                     <button class="btn btn-danger btn-sm" (click)="eliminarPizza(pizza.piz_id)">Eliminar</button>
-
                 </td>
             </tr>
         </tbody>

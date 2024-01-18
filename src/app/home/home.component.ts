@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   data: any[] = [];
   mostrarForm: boolean = false;
   nuevaPizza: any = { piz_name: '', piz_origin: '', piz_state: true };
+  isEditing: boolean = false;
 
 
   constructor(private apiService: ApiService) { }
@@ -30,10 +31,11 @@ export class HomeComponent implements OnInit {
   agregarPizza() {
     this.apiService.crearPizza(this.nuevaPizza).subscribe(
       (respuesta) => {
-        // Puedes agregar la pizza directamente a `data` o volver a cargar todas las pizzas
-        this.data.push(respuesta); // Asegúrate de que esto coincida con el formato de tus datos
-        this.mostrarForm = false; // Ocultar el formulario después de agregar
-        this.nuevaPizza = { piz_name: '', piz_origin: '', piz_state: true }; // Resetear formulario
+        // Agregar la pizza a la lista si la respuesta es correcta
+        this.data.push(respuesta);
+  
+        // Limpia el formulario después de la operación exitosa
+        this.limpiarFormulario();
       },
       (error) => {
         console.error('Error al agregar pizza', error);
@@ -41,16 +43,36 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  editarPizza(pizzaEditada: any) {
-    this.apiService.editarPizza(pizzaEditada).subscribe(
-      () => {
+  editarPizza() {
+    this.apiService.editarPizza(this.nuevaPizza).subscribe(
+      (respuesta) => {
         // Actualiza la lista de pizzas o recarga los datos
         this.llenarData();
+        this.isEditing = false;
+        this.mostrarForm = false;
+        this.nuevaPizza = { piz_name: '', piz_origin: '', piz_state: true }; // Resetear formulario
       },
       (error) => {
         console.error('Error al editar pizza', error);
       }
     );
+  }
+  startEdit(pizza: any) {
+    this.nuevaPizza = { ...pizza };
+    this.mostrarForm = true;
+    this.isEditing = true;
+  }
+
+  cancelarEdicion() {
+    this.isEditing = false;
+    this.mostrarForm = false;
+    this.limpiarFormulario();
+  }
+
+  limpiarFormulario() {
+    this.nuevaPizza = { piz_name: '', piz_origin: '', piz_state: true };
+    this.mostrarForm = false; // Ocultar el formulario
+    this.isEditing = false; // Asegurarse de que el estado de edición está desactivado
   }
 
   eliminarPizza(id: number) {
