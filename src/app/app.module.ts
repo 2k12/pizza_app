@@ -8,6 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { IngredientesComponent } from './ingredients/ingredients.component';
 import { PizzasIngredientsComponent } from './pizzas-ingredients/pizzas-ingredients.component';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +25,12 @@ import { PizzasIngredientsComponent } from './pizzas-ingredients/pizzas-ingredie
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

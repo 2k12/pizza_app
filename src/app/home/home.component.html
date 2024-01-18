@@ -1,53 +1,85 @@
 <!-- home.component.html -->
 <div class="container mt-3">
-    <h2>Listado de Pizzas</h2>
-    <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Pizza</button>
+    <h2>Listado de Pizzas 🍕</h2>
 
+    <div class="d-flex justify-content-between mb-3">
+        <button class="btn btn-success" (click)="mostrarFormulario()">Agregar Pizza</button>
+        <div class="search-container flex-grow-1 ml-3">
+            <input matInput placeholder="Buscar pizza..." (keyup)="aplicarFiltro($event)" class="form-control">
+        </div>
+    </div>
+
+
+    <!-- Formulario para Agregar/Editar Pizza -->
     <div *ngIf="mostrarForm" class="form-container">
         <h3>{{ isEditing ? 'Editar Pizza' : 'Agregar Nueva Pizza' }}</h3>
         <form (ngSubmit)="isEditing ? editarPizza() : agregarPizza()">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaPizza.piz_name" name="nombre" required>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaPizza.piz_name" name="nombre"
+                    required>
             </div>
             <div class="form-group">
                 <label for="origen">Origen:</label>
-                <input type="text" class="form-control" id="origen" [(ngModel)]="nuevaPizza.piz_origin" name="origen" required>
+                <input type="text" class="form-control" id="origen" [(ngModel)]="nuevaPizza.piz_origin" name="origen"
+                    required>
             </div>
-            <!-- El menú desplegable del estado solo aparecerá en modo de edición -->
             <div class="form-group" *ngIf="isEditing">
                 <label for="estado">Estado:</label>
                 <select class="form-control" id="estado" [(ngModel)]="nuevaPizza.piz_state" name="estado" required>
-                    <option [value]="true">Activo</option>
-                    <option [value]="false">Inactivo</option>
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">{{ isEditing ? 'Guardar Cambios' : 'Agregar' }}</button>
-            <!-- Botón para cancelar la edición -->
-            <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="cancelarEdicion()">Cancelar</button>
+            <button type="button" class="btn btn-secondary" *ngIf="isEditing"
+                (click)="cancelarEdicion()">Cancelar</button>
         </form>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Origen</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let pizza of data">
-                <td>{{ pizza.piz_id }}</td>
-                <td>{{ pizza.piz_name }}</td>
-                <td>{{ pizza.piz_origin }}</td>
-                <td>{{ pizza.piz_state ? 'Activo' : 'Inactivo' }}</td>
-                <td>
-                    <button class="btn btn-primary btn-sm" (click)="startEdit(pizza)">Editar</button>
-                    <button class="btn btn-danger btn-sm" (click)="eliminarPizza(pizza.piz_id)">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
+
+
+
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-table">
+        <!-- ID Column -->
+        <ng-container matColumnDef="piz_id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.piz_id}} </td>
+        </ng-container>
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="piz_name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.piz_name}} </td>
+        </ng-container>
+
+        <!-- Origen Column -->
+        <ng-container matColumnDef="piz_origin">
+            <th mat-header-cell *matHeaderCellDef> Origen </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.piz_origin}} </td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="piz_state">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let pizza"> {{pizza.piz_state ? 'Activo' : 'Inactivo'}} </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let pizza">
+                <button mat-button class="color-primary" (click)="startEdit(pizza)">Editar</button>
+                <button mat-button class="color-warn" (click)="eliminarPizza(pizza.piz_id)">Eliminar</button>
+
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
