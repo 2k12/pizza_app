@@ -1,0 +1,57 @@
+<p>pizzas-ingredients works!</p>
+<!-- pizzas-ingredients.component.html -->
+<div class="container mt-3">
+    <h2>Listado de Pizzas-Ingredients</h2>
+    <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Pizza-Ingredient</button>
+
+    <div *ngIf="mostrarForm" class="form-container">
+        <h3>Agregar Nuevo Pizza-Ingredient</h3>
+        <form (ngSubmit)="agregarPizzaIngredient()">
+            <div class="form-group">
+                <label for="piz_id">ID Pizza:</label>
+                <input type="text" class="form-control" id="piz_id" [(ngModel)]="nuevaPizzaIngredient.piz_id"
+                    name="piz_id">
+            </div>
+            <div class="form-group">
+                <label for="ing_id">ID Ingredient:</label>
+                <input type="text" class="form-control" id="ing_id" [(ngModel)]="nuevaPizzaIngredient.ing_id"
+                    name="ing_id">
+            </div>
+            <div class="form-group">
+                <label for="pi_id">ID Pizza-Ingredient:</label>
+                <input type="text" class="form-control" id="pi_id" [(ngModel)]="nuevaPizzaIngredient.pi_id"
+                    name="pi_id">
+            </div>
+            <div class="form-group">
+                <label for="pi_portion">Porción:</label>
+                <input type="text" class="form-control" id="pi_portion" [(ngModel)]="nuevaPizzaIngredient.pi_portion"
+                    name="pi_portion">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ingrediente</th>
+                <th>ID pi</th>
+                <th>ID Pizza-Ingredient</th>
+                <th>Porción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pizzaIngredient of data">
+                <td>{{ pizzaIngredient.ing_name }}</td>
+                <td>{{ pizzaIngredient.pi_id }}</td>
+                <td>{{ pizzaIngredient.pi_portion }}</td>
+                <td>{{ pizzaIngredient.piz_name }}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm"
+                        (click)="eliminarPizzaIngredient(pizzaIngredient.pi_id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
