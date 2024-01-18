@@ -1,0 +1,53 @@
+<!-- home.component.html -->
+<div class="container mt-3">
+    <h2>Listado de Ingredients</h2>
+    <button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Ingredient</button>
+
+    <div *ngIf="mostrarForm" class="form-container">
+        <h3>Agregar Nuevo Ingredient</h3>
+        <form (ngSubmit)="agregarIngrediente()">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoIngrediente.ing_name"
+                    name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="calorias">Calorías:</label>
+                <input type="number" class="form-control" id="calorias" [(ngModel)]="nuevoIngrediente.ing_calories"
+                    name="calorias">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select class="form-control" id="estado" [(ngModel)]="nuevoIngrediente.ing_state" name="estado">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Calorías</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ingredient of data">
+                <td>{{ ingredient.ing_id }}</td>
+                <td>{{ ingredient.ing_name }}</td>
+                <td>{{ ingredient.ing_calories }}</td>
+                <td>{{ ingredient.ing_state ? 'Activo' : 'Inactivo' }}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm"
+                        (click)="eliminarIngrediente(ingredient.ing_id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

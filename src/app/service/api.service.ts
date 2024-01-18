@@ -23,8 +23,8 @@ export class ApiService {
     return this.http.post(`${this.urlApi}/pizzas`, pizza).pipe(
       catchError(this.handleError)
     );
-  } 
-  
+  }
+
   public editarPizza(pizza: any): Observable<any> {
     return this.http.post(`${this.urlApi}/update/${pizza.piz_id}`, pizza).pipe(
       catchError(this.handleError)
@@ -43,4 +43,56 @@ export class ApiService {
     console.error('An error occurred:', error.error.message);
     return throwError('Something bad happened; please try again later.');
   }
+
+
+
+  //                   INGREDIENTS                       
+  public getIngredientes(): Observable<any> {
+    return this.http.get<any>(`${this.urlApi}/ingredients`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public crearIngrediente(ingrediente: any): Observable<any> {
+    return this.http.post(`${this.urlApi}/ingredients`, ingrediente).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public editarIngrediente(ingrediente: any): Observable<any> {
+    return this.http.post(`${this.urlApi}/updateIngredient/${ingrediente.ing_id}`, ingrediente).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public eliminarIngrediente(ing_id: number): Observable<any> {
+    return this.http.post(`${this.urlApi}/deleteIngredient`, { id: ing_id }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
+  //          Pizzas_Ingrediens           
+
+
+  public getData2(): Observable<any> {
+    return this.http.get<any>(`${this.urlApi}/pizzaIngredients`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public agregarPizzaIngredient(pizzaIngredient: any): Observable<any> {
+    return this.http.post(`${this.urlApi}/crearPizza`, pizzaIngredient).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public eliminarPizzaIngredient(piId: number): Observable<any> {
+    return this.http.delete(`${this.urlApi}/eliminarPizza/${piId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
 }
