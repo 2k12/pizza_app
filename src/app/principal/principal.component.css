@@ -1,0 +1,62 @@
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .page-container {
+    text-align: center;
+    background-color: #131313 !important;
+    background-image: url('../../assets/pizza_background.jpg');
+    height: 100vh;
+  }
+  
+  .container {
+    padding: 40px;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #d37e5ab3;
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .header {
+    font-size: 40px;
+    font-weight: bold;
+    color: #e7e7e7;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  }
+  
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .button {
+    display: inline-block;
+    width: 300px;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
+  
+  
