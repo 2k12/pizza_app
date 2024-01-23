@@ -1,0 +1,24 @@
+<!-- edit-pizza-form.component.html -->
+<div class=" p-5">
+    <h3>Editar Pizza</h3>
+    <form (ngSubmit)="editarPizza()">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="pizza.piz_name" name="nombre" required>
+        </div>
+        <div class="form-group mt-4">
+            <label for="origen">Origen:</label>
+            <input type="text" class="form-control" id="origen" [(ngModel)]="pizza.piz_origin" name="origen" required>
+        </div>
+        <div class="form-group mt-4">
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" [(ngModel)]="pizza.piz_state" name="estado" required>
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-5">Guardar Cambios</button>
+        <!-- <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button> -->
+    </form>
+
+</div>

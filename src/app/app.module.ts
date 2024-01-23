@@ -13,13 +13,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreatePizzaFormComponent } from './create-pizza-form/create-pizza-form.component';
+import { EditPizzaFormComponent } from './edit-pizza-form/edit-pizza-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     IngredientesComponent,
-    PizzasIngredientsComponent
+    PizzasIngredientsComponent,
+    CreatePizzaFormComponent,
+    EditPizzaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
