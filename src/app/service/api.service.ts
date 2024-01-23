@@ -71,8 +71,8 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
-  
-  
+
+
 
 
 
@@ -91,11 +91,17 @@ export class ApiService {
     );
   }
 
-  public eliminarPizzaIngredient(piId: number): Observable<any> {
-    return this.http.delete(`${this.urlApi}/eliminarPizza/${piId}`).pipe(
+
+
+  public eliminarPizzaIngredient(pi_id: number): Observable<any> {
+    console.log('ID a eliminar:', pi_id);
+
+    return this.http.delete(`${this.urlApi}/eliminarPizza/${pi_id}`).pipe(
       catchError(this.handleError)
     );
   }
+
+
 
 
 }

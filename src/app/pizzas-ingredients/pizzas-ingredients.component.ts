@@ -1,6 +1,10 @@
-// pizzas-ingredients.component.ts
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../service/api.service';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { EditPizzaFormComponent } from '../edit-pizza-form/edit-pizza-form.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-pizzas-ingredients',
@@ -8,54 +12,85 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./pizzas-ingredients.component.css']
 })
 export class PizzasIngredientsComponent implements OnInit {
-
   data: any[] = [];
-  mostrarForm: boolean = false;
-  nuevaPizzaIngredient: any = { piz_id: '', ing_id: '', pi_id: '', pi_portion: '' };
+  nuevaPizzaIngredient: any = {};
+  mostrarForm = false;
 
-  constructor(private apiService: ApiService) { }
+
+  constructor(private http: HttpClient, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.llenarData();
+    this.getPizzaIngredients();
+    //this.getPizza();
+    //this.getingredients();
+
   }
 
-  llenarData() {
-    this.apiService.getData2().subscribe(data => {
-      this.data = data;
-      console.log(this.data);
-    });
-  }
-
-  mostrarFormulario() {
+  mostrarFormulario(): void {
     this.mostrarForm = !this.mostrarForm;
   }
 
-  agregarPizzaIngredient() {
-    this.apiService.agregarPizzaIngredient(this.nuevaPizzaIngredient).subscribe(
-      (respuesta) => {
-        this.data.push(respuesta);
-        this.mostrarForm = false;
-        this.limpiarFormulario();
-      },
-      (error) => {
-        console.error('Error al agregar pizza-ingredient', error);
-      }
-    );
+  agregarPizzaIngredient(): void {
+    this.http.post('http://localhost:3000/crearPizza', this.nuevaPizzaIngredient)
+      .subscribe(response => {
+        console.log(response);
+        this.getPizzaIngredients();
+      }, error => {
+        console.error(error);
+      });
   }
 
-  eliminarPizzaIngredient(piId: number) {
-    this.apiService.eliminarPizzaIngredient(piId).subscribe(
-      (respuesta) => {
-        console.log('Pizza-ingredient eliminado correctamente', respuesta);
-        this.llenarData();
-      },
-      (error) => {
-        console.error('Error al eliminar pizza-ingredient', error);
-      }
-    );
+  eliminarPizzaIngredient(pi_id: number): void {
+    const confirmarEliminar = window.confirm('¿Seguro que deseas eliminar este Pizza-Ingredient?');
+
+    if (confirmarEliminar) {
+      this.apiService.eliminarPizzaIngredient(pi_id).subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response);
+          console.log('Pizza-Ingredient eliminado correctamente');
+          this.getPizzaIngredients();
+        },
+        error: (error) => {
+          console.error('Error al eliminar Pizza-Ingredient', error);
+        }
+      });
+    }
   }
 
-  private limpiarFormulario() {
-    this.nuevaPizzaIngredient = { piz_id: '', ing_id: '', pi_id: '', pi_portion: '' };
+
+
+  getPizzaIngredients(): void {
+    this.http.get('http://localhost:3000/pizzaIngredients')
+      .subscribe((response: any) => {
+        this.data = response;
+        console.log(this.data);
+      }, error => {
+        console.error(error);
+      });
   }
+
+  // Si deseas obtener las pizzas usando el servicio ApiService, puedes llamar a la función correspondiente aquí
+  getPizza(): void {
+    this.http.get('http://localhost:3000/pizzas')
+      .subscribe((response: any) => {
+        this.data = response;
+      }, error => {
+        console.error(error);
+      });
+  }
+
+  getingredients(): void {
+    this.http.get('http://localhost:3000/ingredients')
+      .subscribe((response: any) => {
+        this.data = response;
+      }, error => {
+        console.error(error);
+      });
+  }
+
+
+
+
+
 }
+
