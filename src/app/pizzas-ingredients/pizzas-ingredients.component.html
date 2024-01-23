@@ -6,21 +6,49 @@
 
     <div *ngIf="mostrarForm" class="form-container">
         <h3>Agregar Nuevo Pizza-Ingredient</h3>
-        <form (ngSubmit)="agregarPizzaIngredient()">
+        <form (submit)="agregarPizzaIngredient()">
             <div class="form-group">
-                <label for="piz_id">ID Pizza:</label>
-                <input type="text" class="form-control" id="piz_id" [(ngModel)]="nuevaPizzaIngredient.piz_id"
-                    name="piz_id">
+                <label for="piz_name">Nombre de la Pizza:</label>
+                <input type="text" class="form-control" id="piz_name" [(ngModel)]="nuevaPizzaIngredient.piz_name"
+                    name="piz_name">
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="piz_origin">Origen de la Pizza:</label>
+                <input type="text" class="form-control" id="piz_origin" [(ngModel)]="nuevaPizzaIngredient.piz_origin"
+                    name="piz_origin">
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="piz_state">Estado de la Pizza:</label>
+                <input type="text" class="form-control" id="piz_state" [(ngModel)]="nuevaPizzaIngredient.piz_state"
+                    name="piz_state">
             </div>
             <div class="form-group">
-                <label for="ing_id">ID Ingredient:</label>
-                <input type="text" class="form-control" id="ing_id" [(ngModel)]="nuevaPizzaIngredient.ing_id"
-                    name="ing_id">
+                <label for="ing_name">Nombre del Ingrediente:</label>
+                <input type="text" class="form-control" id="ing_name" [(ngModel)]="nuevaPizzaIngredient.ing_name"
+                    name="ing_name">
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="ing_calories">Calorías del Ingrediente:</label>
+                <input type="text" class="form-control" id="ing_calories"
+                    [(ngModel)]="nuevaPizzaIngredient.ing_calories" name="ing_calories">
             </div>
             <div class="form-group">
-                <label for="pi_id">ID Pizza-Ingredient:</label>
-                <input type="text" class="form-control" id="pi_id" [(ngModel)]="nuevaPizzaIngredient.pi_id"
-                    name="pi_id">
+                <label for="ing_state">Estado del Ingrediente:</label>
+                <input type="text" class="form-control" id="ing_state" [(ngModel)]="nuevaPizzaIngredient.ing_state"
+                    name="ing_state">
             </div>
             <div class="form-group">
                 <label for="pi_portion">Porción:</label>
@@ -30,13 +58,18 @@
             <button type="submit" class="btn btn-primary">Agregar</button>
         </form>
     </div>
+
     <table class="table">
         <thead>
             <tr>
                 <th>Ingrediente</th>
-                <th>ID pi</th>
                 <th>ID Pizza-Ingredient</th>
                 <th>Porción</th>
+                <th>Nombre de la Pizza</th>
+                <th>Origen de la Pizza</th>
+                <th>Estado de la Pizza</th>
+                <th>Calorías del Ingrediente</th>
+                <th>Estado del Ingrediente</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -46,6 +79,10 @@
                 <td>{{ pizzaIngredient.pi_id }}</td>
                 <td>{{ pizzaIngredient.pi_portion }}</td>
                 <td>{{ pizzaIngredient.piz_name }}</td>
+                <td>{{ pizzaIngredient.piz_origin }}</td>
+                <td>{{ pizzaIngredient.piz_state }}</td>
+                <td>{{ pizzaIngredient.ing_calories }}</td>
+                <td>{{ pizzaIngredient.ing_state }}</td>
                 <td>
                     <button class="btn btn-primary btn-sm">Editar</button>
                     <button class="btn btn-danger btn-sm"
