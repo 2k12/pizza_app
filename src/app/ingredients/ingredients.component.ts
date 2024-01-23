@@ -128,10 +128,20 @@ export class IngredientesComponent implements OnInit {
   startEdit(ingredient: any): void {
     // Copiar los valores del ingrediente a la variable ingredienteEditado
     this.ingredienteEditado = { ...ingredient };
-    this.mostrarFormularioo = true;
+    this.mostrarFormularioo = !this.mostrarFormularioo;
 }
 cerrarFormularioEdicion(): void {
-  this.mostrarFormularioo = false;
+  this.mostrarFormularioo = !this.mostrarFormularioo;
+  
 }
   
+aplicarFiltro(event: Event) {
+  const inputElement = event.target as HTMLInputElement;
+  const filtroValor = inputElement.value;
+  this.dataSource.filter = filtroValor.trim().toLowerCase();
+
+  if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage(); // Volver a la primera página si el filtro cambia
+  }
+}
 }
