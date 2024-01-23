@@ -60,16 +60,19 @@ export class ApiService {
   }
 
   public editarIngrediente(ingrediente: any): Observable<any> {
-    return this.http.post(`${this.urlApi}/updateIngredient/${ingrediente.ing_id}`, ingrediente).pipe(
+    // a esta línea
+    return this.http.post(`${this.urlApi}/updateIngredient`, ingrediente).pipe(
       catchError(this.handleError)
     );
   }
 
-  public eliminarIngrediente(ing_id: number): Observable<any> {
-    return this.http.post(`${this.urlApi}/deleteIngredient`, { id: ing_id }).pipe(
+  public eliminarIngrediente(ing_ida: number): Observable<any> {
+    return this.http.delete(`${this.urlApi}/deleteIngredient/${ing_ida}`).pipe(
       catchError(this.handleError)
     );
   }
+  
+  
 
 
 
